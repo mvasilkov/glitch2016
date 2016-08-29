@@ -1,0 +1,78 @@
+/// <reference path="couch.d.ts" />
+
+class Vec2 {
+    x: number
+    y: number
+
+    constructor(x: number = 0, y: number = 0) {
+        this.x = x
+        this.y = y
+    }
+
+    set(x: number, y: number) {
+        this.x = x
+        this.y = y
+    }
+
+    setTo(other: Vec2) {
+        this.x = other.x
+        this.y = other.y
+    }
+
+    length() {
+        return Math.sqrt(this.x * this.x + this.y * this.y)
+    }
+
+    distance(other: Vec2) {
+        const x = this.x - other.x
+        const y = this.y - other.y
+        return Math.sqrt(x * x + y * y)
+    }
+
+    add(other: Vec2) {
+        this.x += other.x
+        this.y += other.y
+    }
+
+    subtract(other: Vec2) {
+        this.x -= other.x
+        this.y -= other.y
+    }
+
+    setSubtract(a: Vec2, b: Vec2) {
+        this.x = a.x - b.x
+        this.y = a.y - b.y
+    }
+
+    dot(other: Vec2) {
+        return this.x * other.x + this.y * other.y
+    }
+
+    multiplyScalar(a: number) {
+        this.x *= a
+        this.y *= a
+    }
+
+    setMultiplyScalar(other: Vec2, a: number) {
+        this.x = other.x * a
+        this.y = other.y * a
+    }
+
+    setNormal(a: Vec2, b: Vec2) {
+        // perpendicular
+        const x = a.y - b.y
+        const y = b.x - a.x
+
+        // normalize
+        const length = Math.sqrt(x * x + y * y)
+        if (length < Number.MIN_VALUE) {
+            this.x = x
+            this.y = y
+            return
+        }
+
+        const inverseLength = 1 / length
+        this.x = x * inverseLength
+        this.y = y * inverseLength
+    }
+}
