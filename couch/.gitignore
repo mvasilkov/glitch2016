@@ -2,4 +2,5 @@ Body.js
 Constraint.js
 Point.js
 Vec2.js
+collision.js
 main.js

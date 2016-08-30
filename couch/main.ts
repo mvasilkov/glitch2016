@@ -7,8 +7,11 @@ const kFrictionGround = 0.6
 const kViscosity = 1
 const kForceDrag = 20
 
-const bodies = []
-const vertices = []
-const constraints = []
+const bodies = [] as Body[]
+const vertices = [] as Point[]
+const constraints = [] as Constraint[]
+
+const register0 = new Vec2
+const register1 = new Vec2
 
 const canvas = <HTMLCanvasElement>document.getElementById('canvas')

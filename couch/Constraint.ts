@@ -25,18 +25,15 @@ class Constraint {
         constraints.push(this)
     }
 
-    static _internal = new Vec2
-
     solve() {
-        const a = Constraint._internal
-        a.setSubtract(this.p0, this.p1)
+        register0.setSubtract(this.p0, this.p1)
 
-        const length = a.length()
+        const length = register0.length()
         if (length) {
-            a.multiplyScalar(this.stiffness * (this.length - length) / length)
+            register0.multiplyScalar(this.stiffness * (this.length - length) / length)
 
-            this.p0.add(a)
-            this.p1.subtract(a)
+            this.p0.add(register0)
+            this.p1.subtract(register0)
         }
     }
 }
