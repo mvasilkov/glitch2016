@@ -5,7 +5,7 @@ const kNumIterations = 20
 const kFriction = 0.9
 const kFrictionGround = 0.6
 const kViscosity = 1
-const kForceDrag = 4
+const kForceDrag = 0.2
 
 const bodies = [] as Body[]
 const vertices = [] as Point[]
@@ -16,39 +16,51 @@ let draggingPoint: Point | null = null
 const register0 = new Vec2
 const register1 = new Vec2
 
-const cwidth = 960
-const cheight = 540
-const aspect = 16 / 9
+let stats: Stats
 
-let cscale = 1
+function mainloop() {
+    stats.begin()
+    context.clearRect(0, 0, cwidth, cheight)
 
-const canvas = <HTMLCanvasElement>document.getElementById('canvas')
-const context = <CanvasRenderingContext2D>canvas.getContext('2d')
+    for (let p of vertices) {
+        p.integrate()
+    }
 
-canvas.width = cwidth
-canvas.height = cheight
+    if (draggingPoint) {
+        draggingPoint.position.x += (pointer.x - draggingPoint.position.x) * kForceDrag
+        draggingPoint.position.y += (pointer.y - draggingPoint.position.y) * kForceDrag
+    }
 
-function setSize(x: HTMLElement, property: string, value: number) {
-    x.style[<any>property] = `${value}px`
+    for (let n = 0; n < kNumIterations; ++n) {
+        for (let c of constraints) {
+            c.solve()
+        }
+
+        for (let b of bodies) {
+            b.boundingBox()
+        }
+
+        for (let i = 0; i < bodies.length - 1; ++i) {
+            for (let j = i + 1; j < bodies.length; ++j) {
+                if (sat(bodies[i], bodies[j])) {
+                    resolve()
+                }
+            }
+        }
+    }
+
+    for (let b of bodies) {
+        b.draw()
+    }
+
+    if (draggingPoint) {
+        context.beginPath()
+        context.moveTo(draggingPoint.position.x, draggingPoint.position.y)
+        context.lineTo(pointer.x, pointer.y)
+        context.strokeStyle = '#FFD600'
+        context.stroke()
+    }
+
+    stats.end()
+    requestAnimationFrame(mainloop)
 }
-
-function handleResize() {
-    let w = window.innerWidth
-    let h = window.innerHeight
-
-    if (w / h > aspect)
-        w = h * aspect
-    else
-        h = w / aspect
-
-    cscale = cwidth / w
-
-    setSize(canvas, 'width', w)
-    setSize(canvas, 'height', h)
-    setSize(canvas, 'left', 0.5 * (window.innerWidth - w))
-    setSize(canvas, 'top', 0.5 * (window.innerHeight - h))
-}
-
-handleResize()
-window.addEventListener('resize', handleResize)
-window.addEventListener('orientationchange', handleResize)

@@ -2,6 +2,10 @@ Body.js
 Constraint.js
 Point.js
 Vec2.js
+canvas.js
 collision.js
 main.js
 pointer.js
+
+node_modules/
+typings/

@@ -53,8 +53,11 @@ class Body {
     draw() {
         context.beginPath()
 
-        for (let edge of this.edges) {
-            context.lineTo(edge.p0.x, edge.p0.y)
+        const p0 = this.edges[0].p0
+        context.moveTo(p0.x, p0.y)
+
+        for (let {p1} of this.edges) {
+            context.lineTo(p1.x, p1.y)
         }
 
         context.fillStyle = '#AEEA00'
