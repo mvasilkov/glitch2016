@@ -4,3 +4,4 @@
 /// <reference path="Vec2.ts" />
 /// <reference path="collision.ts" />
 /// <reference path="main.ts" />
+/// <reference path="pointer.ts" />

@@ -47,7 +47,7 @@ const [sat, resolve] = (function () {
         for (let p of b0.vertices) {
             register0.setSubtract(p.position, b1.center)
 
-            let distance = satAxis.dot(register0)
+            const distance = satAxis.dot(register0)
             if (distance < minDistance) {
                 minDistance = distance
                 satPoint = p

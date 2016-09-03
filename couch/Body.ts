@@ -49,4 +49,33 @@ class Body {
             if (product > this._max) this._max = product
         }
     }
+
+    draw() {
+        context.beginPath()
+
+        for (let edge of this.edges) {
+            context.lineTo(edge.p0.x, edge.p0.y)
+        }
+
+        context.fillStyle = '#AEEA00'
+        context.fill()
+
+        this.drag()
+    }
+
+    drag() {
+        if (pointer.dragging && !draggingPoint &&
+            context.isPointInPath(pointer.x, pointer.y)) {
+
+            let minDistance = 99999
+
+            for (let p of this.vertices) {
+                const distance = p.position.distance(pointer)
+                if (distance < minDistance) {
+                    minDistance = distance
+                    draggingPoint = p
+                }
+            }
+        }
+    }
 }
