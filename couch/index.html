@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset=utf8>
+        <meta name=viewport content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <title>Couch 2048</title>
+        <link rel=stylesheet href=couch.css>
+    </head>
+    <body>
+        <canvas id=canvas></canvas>
+
+        <script src=Body.js></script>
+        <script src=Character.js></script>
+        <script src=Constraint.js></script>
+        <script src=Point.js></script>
+        <script src=Vec2.js></script>
+        <script src=canvas.js></script>
+        <script src=collision.js></script>
+        <script src=main.js></script>
+        <script src=pointer.js></script>
+
+        <script src=node_modules/stats.js/build/stats.min.js></script>
+
+        <script>
+            init()
+            requestAnimationFrame(mainloop)
+        </script>
+    </body>
+</html>

@@ -65,3 +65,16 @@ function mainloop() {
     stats.end()
     requestAnimationFrame(mainloop)
 }
+
+function init() {
+    const x = cwidth * 0.2
+    const y = cheight * 0.5
+
+    bodies.push(new Character(x, y, 30, 1))
+    bodies.push(new Character(x * 2, y, 40, 1))
+    bodies.push(new Character(x * 3, y, 50, 1))
+    bodies.push(new Character(x * 4, y, 60, 1))
+
+    stats = new Stats
+    document.body.appendChild(stats.dom)
+}

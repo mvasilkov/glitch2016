@@ -1,0 +1,13 @@
+html, body {
+    background: #101010;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+
+#canvas {
+    background: #303030;
+    position: absolute;
+}
