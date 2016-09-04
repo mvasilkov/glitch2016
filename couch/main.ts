@@ -1,7 +1,7 @@
 /// <reference path="couch.d.ts" />
 
-const kGravity = 0.1
-const kNumIterations = 20
+const kGravity = 0.6
+const kNumIterations = 40
 const kFriction = 0.9
 const kFrictionGround = 0.6
 const kViscosity = 1
@@ -57,6 +57,7 @@ function mainloop() {
         context.beginPath()
         context.moveTo(draggingPoint.position.x, draggingPoint.position.y)
         context.lineTo(pointer.x, pointer.y)
+        context.lineWidth = 2
         context.strokeStyle = '#FFD600'
         context.stroke()
     }

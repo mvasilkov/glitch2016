@@ -1,6 +1,7 @@
 /// <reference path="typings/index.d.ts" />
 
 /// <reference path="Body.ts" />
+/// <reference path="Character.ts" />
 /// <reference path="Constraint.ts" />
 /// <reference path="Point.ts" />
 /// <reference path="Vec2.ts" />
