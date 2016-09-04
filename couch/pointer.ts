@@ -10,7 +10,12 @@ const pointer: IPointer = {
     y: 0,
 }
 
-function setPointerPosition(event: MouseEvent) {
+interface IPointerEvent {
+    clientX: number
+    clientY: number
+}
+
+function setPointerPosition(event: IPointerEvent) {
     pointer.x = (event.clientX - canvas.offsetLeft) * cscale
     pointer.y = (event.clientY - canvas.offsetTop) * cscale
 }
@@ -29,6 +34,33 @@ addEventListener('mousemove', event => {
 })
 
 addEventListener('mouseup', event => {
+    event.preventDefault()
+
+    pointer.dragging = false
+    draggingPoint = null
+})
+
+document.addEventListener('touchstart', event => {
+    event.preventDefault()
+
+    pointer.dragging = true
+    setPointerPosition(event.targetTouches[0])
+})
+
+document.addEventListener('touchmove', event => {
+    event.preventDefault()
+
+    setPointerPosition(event.targetTouches[0])
+})
+
+document.addEventListener('touchend', event => {
+    event.preventDefault()
+
+    pointer.dragging = false
+    draggingPoint = null
+})
+
+document.addEventListener('touchcancel', event => {
     event.preventDefault()
 
     pointer.dragging = false
