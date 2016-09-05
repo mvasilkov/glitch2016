@@ -9,3 +9,4 @@
 /// <reference path="collision.ts" />
 /// <reference path="main.ts" />
 /// <reference path="pointer.ts" />
+/// <reference path="polyfill.d.ts" />

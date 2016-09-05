@@ -5,7 +5,7 @@ const kNumIterations = 40
 const kFriction = 0.9
 const kFrictionGround = 0.6
 const kViscosity = 1
-const kForceDrag = 0.2
+const kForceDrag = 0.1
 
 const bodies = [] as Body[]
 const vertices = [] as Point[]
@@ -70,10 +70,10 @@ function init() {
     const x = cwidth * 0.2
     const y = cheight * 0.5
 
-    bodies.push(new Character(x, y, 30, 1))
-    bodies.push(new Character(x * 2, y, 40, 1))
-    bodies.push(new Character(x * 3, y, 50, 1))
-    bodies.push(new Character(x * 4, y, 60, 1))
+    bodies.push(new Character(x, y))
+    bodies.push(new Character(x * 2, y, 8))
+    bodies.push(new Character(x * 3, y, 128))
+    bodies.push(new Character(x * 4, y, 2048))
 
     stats = new Stats
     document.body.appendChild(stats.dom)

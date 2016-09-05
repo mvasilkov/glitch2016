@@ -64,6 +64,9 @@ class Body {
         context.fill()
 
         this.drag()
+
+        context.fillStyle = '#FF1744'
+        context.fillRect(this.center.x - 1, this.center.y - 1, 2, 2)
     }
 
     drag() {

@@ -1,11 +1,20 @@
 /// <reference path="couch.d.ts" />
 
-const nPoints = 10
-const aStep = 2 * Math.PI / nPoints
+function numberOfPoints(r: number) {
+    return Math.min((0 | 0.04 * Math.PI * r) << 1, 16)
+}
 
 class Character extends Body {
-    constructor(x: number, y: number, r: number, mass: number) {
-        super(mass)
+    n: number
+
+    constructor(x: number, y: number, n: number = 1) {
+        super(1 + 0.5 * Math.log10(n))
+
+        this.n = n
+
+        const r = 40 + 5 * Math.log2(n)
+        const nPoints = numberOfPoints(r)
+        const aStep = 2 * Math.PI / nPoints
 
         for (let i = 0; i < nPoints; ++i) {
             let a = i * aStep
