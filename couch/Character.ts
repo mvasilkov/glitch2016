@@ -6,19 +6,20 @@ function numberOfPoints(r: number) {
 
 class Character extends Body {
     n: number
+    r: number
 
     constructor(x: number, y: number, n: number = 1) {
         super(1 + 0.5 * Math.log10(n))
 
         this.n = n
+        this.r = 40 + 5 * Math.log2(n)
 
-        const r = 40 + 5 * Math.log2(n)
-        const nPoints = numberOfPoints(r)
+        const nPoints = numberOfPoints(this.r)
         const aStep = 2 * Math.PI / nPoints
 
         for (let i = 0; i < nPoints; ++i) {
             let a = i * aStep
-            new Point(this, x + r * Math.cos(a), y + r * Math.sin(a))
+            new Point(this, x + this.r * Math.cos(a), y + this.r * Math.sin(a))
         }
 
         for (let i = 0; i < nPoints - 1; ++i) {

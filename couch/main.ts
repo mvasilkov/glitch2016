@@ -1,15 +1,16 @@
 /// <reference path="couch.d.ts" />
 
 const kGravity = 0.6
+const kAttractiveForce = 0.1
 const kNumIterations = 40
 const kFriction = 0.9
 const kFrictionGround = 0.6
 const kViscosity = 1
 const kForceDrag = 0.1
 
-const bodies = [] as Body[]
-const vertices = [] as Point[]
-const constraints = [] as Constraint[]
+let bodies = [] as Body[]
+let vertices = [] as Point[]
+let constraints = [] as Constraint[]
 
 let draggingPoint: Point | null = null
 
@@ -24,6 +25,57 @@ function mainloop() {
 
     for (let p of vertices) {
         p.integrate()
+    }
+
+    for (let i = 0; i < bodies.length - 1; ++i) {
+        const b = bodies[i]
+        if (!(b instanceof Character)) continue
+
+        const attractDistance = 2.5 * b.r
+        let minDistance = 99999
+        let other: Character | null = null
+        let index = 0
+
+        for (let j = i + 1; j < bodies.length; ++j) {
+            const bb = bodies[j]
+            if (!(bb instanceof Character)) continue
+            if (b.n != bb.n) continue
+
+            const distance = b.center.distance(bb.center)
+            if (distance < attractDistance && distance < minDistance) {
+                minDistance = distance
+                other = bb
+                index = j
+            }
+        }
+
+        if (!other) continue
+
+        const x = 0.5 * (b.center.x + other.center.x)
+        const y = 0.5 * (b.center.y + other.center.y)
+
+        if (minDistance > 2 * b.r) {
+            for (let p of b.positions) {
+                p.x += (x - p.x) * kAttractiveForce
+                p.y += (y - p.y) * kAttractiveForce
+            }
+
+            for (let p of other.positions) {
+                p.x += (x - p.x) * kAttractiveForce
+                p.y += (y - p.y) * kAttractiveForce
+            }
+        }
+        else {
+            constraints = constraints.filter(c => c.parent != b && c.parent != other)
+            vertices = vertices.filter(p => p.parent != b && p.parent != other)
+
+            if (draggingPoint && (draggingPoint.parent == b || draggingPoint.parent == other)) {
+                draggingPoint = null
+            }
+
+            bodies.splice(index, 1)
+            bodies.splice(i, 1, new Character(x, y, b.n << 1))
+        }
     }
 
     if (draggingPoint) {
@@ -71,9 +123,13 @@ function init() {
     const y = cheight * 0.5
 
     bodies.push(new Character(x, y))
-    bodies.push(new Character(x * 2, y, 8))
-    bodies.push(new Character(x * 3, y, 128))
-    bodies.push(new Character(x * 4, y, 2048))
+    bodies.push(new Character(x * 2, y))
+    bodies.push(new Character(x * 3, y, 2))
+    bodies.push(new Character(x * 4, y, 4))
+
+    for (let b of bodies) {
+        b.boundingBox()
+    }
 
     stats = new Stats
     document.body.appendChild(stats.dom)
