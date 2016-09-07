@@ -17,6 +17,8 @@ let draggingPoint: Point | null = null
 const register0 = new Vec2
 const register1 = new Vec2
 
+const count: { [n: number]: number } = {}
+
 let stats: Stats
 
 function mainloop() {
@@ -26,6 +28,8 @@ function mainloop() {
     for (let p of vertices) {
         p.integrate()
     }
+
+    let addPieces = false
 
     for (let i = 0; i < bodies.length - 1; ++i) {
         const b = bodies[i]
@@ -75,7 +79,15 @@ function mainloop() {
 
             bodies.splice(index, 1)
             bodies.splice(i, 1, new Character(x, y, b.n << 1))
+
+            count[b.n] -= 2
+
+            addPieces = true
         }
+    }
+
+    if (addPieces) {
+        addPiecesRateLimit()
     }
 
     if (draggingPoint) {
@@ -118,7 +130,27 @@ function mainloop() {
     requestAnimationFrame(mainloop)
 }
 
+const addPiecesRateLimit = debounce(function () {
+    if (count[1]) {
+        newPiece(0.5 * cwidth)
+    }
+    else {
+        newPiece(0.3333 * cwidth)
+        newPiece(0.6666 * cwidth)
+    }
+}, 300)
+
+function newPiece(x: number) {
+    const piece = new Character(x)
+    piece.boundingBox()
+    bodies.push(piece)
+}
+
 function init() {
+    for (let n = 1; n <= 2048; n *= 2) {
+        count[n] = 0
+    }
+
     const x = cwidth * 0.2
     const y = cheight * 0.5
 

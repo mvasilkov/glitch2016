@@ -5,6 +5,7 @@ Point.js
 Vec2.js
 canvas.js
 collision.js
+debounce.js
 main.js
 pointer.js
 

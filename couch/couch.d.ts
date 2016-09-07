@@ -7,6 +7,7 @@
 /// <reference path="Vec2.ts" />
 /// <reference path="canvas.ts" />
 /// <reference path="collision.ts" />
+/// <reference path="debounce.ts" />
 /// <reference path="main.ts" />
 /// <reference path="pointer.ts" />
 /// <reference path="polyfill.d.ts" />

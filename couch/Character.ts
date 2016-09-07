@@ -8,10 +8,10 @@ class Character extends Body {
     n: number
     r: number
 
-    constructor(x: number, y: number, n: number = 1) {
+    constructor(x: number, y: number = -40, n: number = 1) {
         super(1 + 0.5 * Math.log10(n))
 
-        this.n = n
+        ++count[this.n = n]
         this.r = 40 + 5 * Math.log2(n)
 
         const nPoints = numberOfPoints(this.r)
