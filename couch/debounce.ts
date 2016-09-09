@@ -1,5 +1,5 @@
 function debounce(proc: () => void, wait: number): () => void {
-    let timeout: number | undefined = undefined
+    let timeout: number | null = null
     let lastCall: number
 
     return function () {
@@ -12,7 +12,7 @@ function debounce(proc: () => void, wait: number): () => void {
                 timeout = setTimeout(wrapped, wait - napping)
             }
             else {
-                timeout = undefined
+                timeout = null
                 proc()
             }
         }

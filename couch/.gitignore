@@ -1,6 +1,6 @@
 Body.js
-Character.js
 Constraint.js
+Piece.js
 Point.js
 Vec2.js
 canvas.js

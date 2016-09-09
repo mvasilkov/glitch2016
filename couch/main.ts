@@ -33,16 +33,16 @@ function mainloop() {
 
     for (let i = 0; i < bodies.length - 1; ++i) {
         const b = bodies[i]
-        if (!(b instanceof Character)) continue
+        if (!(b instanceof Piece)) continue
 
         const attractDistance = 2.5 * b.r
         let minDistance = 99999
-        let other: Character | null = null
+        let other: Piece | null = null
         let index = 0
 
         for (let j = i + 1; j < bodies.length; ++j) {
             const bb = bodies[j]
-            if (!(bb instanceof Character)) continue
+            if (!(bb instanceof Piece)) continue
             if (b.n != bb.n) continue
 
             const distance = b.center.distance(bb.center)
@@ -78,7 +78,7 @@ function mainloop() {
             }
 
             bodies.splice(index, 1)
-            bodies.splice(i, 1, new Character(x, y, b.n << 1))
+            bodies[i] = new Piece(x, y, b.n << 1, false)
 
             count[b.n] -= 2
 
@@ -132,19 +132,13 @@ function mainloop() {
 
 const addPiecesRateLimit = debounce(function () {
     if (count[1]) {
-        newPiece(0.5 * cwidth)
+        new Piece(0.5 * cwidth)
     }
     else {
-        newPiece(0.3333 * cwidth)
-        newPiece(0.6666 * cwidth)
+        new Piece(0.3333 * cwidth)
+        new Piece(0.6666 * cwidth)
     }
 }, 300)
-
-function newPiece(x: number) {
-    const piece = new Character(x)
-    piece.boundingBox()
-    bodies.push(piece)
-}
 
 function init() {
     for (let n = 1; n <= 2048; n *= 2) {
@@ -154,14 +148,10 @@ function init() {
     const x = cwidth * 0.2
     const y = cheight * 0.5
 
-    bodies.push(new Character(x, y))
-    bodies.push(new Character(x * 2, y))
-    bodies.push(new Character(x * 3, y, 2))
-    bodies.push(new Character(x * 4, y, 4))
-
-    for (let b of bodies) {
-        b.boundingBox()
-    }
+    new Piece(x, y)
+    new Piece(x * 2, y)
+    new Piece(x * 3, y, 2)
+    new Piece(x * 4, y, 4)
 
     stats = new Stats
     document.body.appendChild(stats.dom)

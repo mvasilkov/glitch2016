@@ -9,3 +9,9 @@ if (!Math.log10) {
         return Math.log(x) / Math.LN10
     }
 }
+
+if (!Date.now) {
+    Date.now = function () {
+        return new Date().getTime()
+    }
+}
