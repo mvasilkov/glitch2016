@@ -3,7 +3,7 @@
 const [sat, resolve] = (function () {
     let satDistance: number
     const satAxis = new Vec2
-    let satEdge: Constraint
+    let satBoundary: Constraint
     let satPoint: Point
 
     // Separating Axis Theorem collision test
@@ -16,8 +16,8 @@ const [sat, resolve] = (function () {
         satDistance = 99999
 
         for (let b of [b0, b1]) {
-            for (let edge of b.edges) {
-                register0.setNormal(edge.p0, edge.p1)
+            for (let boundary of b.boundaries) {
+                register0.setNormal(boundary.p0, boundary.p1)
                 b0.project(register0)
                 b1.project(register0)
 
@@ -28,12 +28,12 @@ const [sat, resolve] = (function () {
                 if (distance < satDistance) {
                     satDistance = distance
                     satAxis.setTo(register0)
-                    satEdge = edge
+                    satBoundary = boundary
                 }
             }
         }
 
-        if (satEdge.parent != b1) {
+        if (satBoundary.parent != b1) {
             [b0, b1] = [b1, b0]
         }
 
@@ -59,10 +59,10 @@ const [sat, resolve] = (function () {
 
     // collision resolution
     function resolve() {
-        const p0 = satEdge.p0
-        const p1 = satEdge.p1
-        const o0 = satEdge.v0.oldPosition
-        const o1 = satEdge.v1.oldPosition
+        const p0 = satBoundary.p0
+        const p1 = satBoundary.p1
+        const o0 = satBoundary.v0.oldPosition
+        const o1 = satBoundary.v1.oldPosition
         const pp = satPoint.position
         const po = satPoint.oldPosition
 
@@ -74,7 +74,7 @@ const [sat, resolve] = (function () {
         const u = 1 / (t * t + (1 - t) * (1 - t))
 
         let m0 = satPoint.parent.mass
-        let m1 = satEdge.parent.mass
+        let m1 = satBoundary.parent.mass
         const tm = m0 + m1
         m0 /= tm * 2
         m1 /= tm

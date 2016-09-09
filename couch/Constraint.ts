@@ -8,9 +8,9 @@ class Constraint {
     p1: Vec2
     length: number
     stiffness: number
-    edge: boolean
+    isBoundary: boolean
 
-    constructor(parent: Body, v0: Point, v1: Point, stiffness: number, edge: boolean = false) {
+    constructor(parent: Body, v0: Point, v1: Point, stiffness: number, isBoundary: boolean = false) {
         this.parent = parent
         this.v0 = v0
         this.v1 = v1
@@ -18,10 +18,10 @@ class Constraint {
         this.p1 = v1.position
         this.length = this.p0.distance(this.p1)
         this.stiffness = stiffness
-        this.edge = edge
+        this.isBoundary = isBoundary
 
         parent.constraints.push(this)
-        if (edge) parent.edges.push(this)
+        if (isBoundary) parent.boundaries.push(this)
         constraints.push(this)
     }
 

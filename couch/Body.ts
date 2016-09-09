@@ -4,7 +4,7 @@ class Body {
     vertices: Point[]
     positions: Vec2[]
     constraints: Constraint[]
-    edges: Constraint[]
+    boundaries: Constraint[]
     center: Vec2
     halfExtents: Vec2
     mass: number
@@ -13,7 +13,7 @@ class Body {
         this.vertices = []
         this.positions = []
         this.constraints = []
-        this.edges = []
+        this.boundaries = []
         this.center = new Vec2
         this.halfExtents = new Vec2
         this.mass = mass
@@ -53,10 +53,10 @@ class Body {
     draw() {
         context.beginPath()
 
-        const p0 = this.edges[0].p0
+        const {p0} = this.boundaries[0]
         context.moveTo(p0.x, p0.y)
 
-        for (let {p1} of this.edges) {
+        for (let {p1} of this.boundaries) {
             context.lineTo(p1.x, p1.y)
         }
 
