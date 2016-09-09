@@ -1,7 +1,9 @@
 Body.js
 Constraint.js
+Cushion.js
 Piece.js
 Point.js
+StaticPoint.js
 Vec2.js
 canvas.js
 collision.js

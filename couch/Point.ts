@@ -29,13 +29,13 @@ class Point {
         // screen limits
         if (p.y < -100) p.y = -100
 
-        else if (p.y > canvas.height) {
+        else if (p.y >= canvas.height) {
             p.x -= (p.x - o.x) * kFrictionGround
-            p.y = canvas.height
+            p.y = canvas.height - 1
         }
 
         if (p.x < 0) p.x = 0
 
-        else if (p.x > canvas.width) p.x = canvas.width
+        else if (p.x >= canvas.width) p.x = canvas.width - 1
     }
 }

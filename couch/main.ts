@@ -135,8 +135,8 @@ const addPiecesRateLimit = debounce(function () {
         new Piece(0.5 * cwidth)
     }
     else {
-        new Piece(0.3333 * cwidth)
-        new Piece(0.6666 * cwidth)
+        new Piece(0.4 * cwidth)
+        new Piece(0.6 * cwidth)
     }
 }, 300)
 
@@ -144,6 +144,13 @@ function init() {
     for (let n = 1; n <= 2048; n *= 2) {
         count[n] = 0
     }
+
+    const base = new Cushion(300, 480, 360, 60)
+    const left = new Cushion(240, 420, 60, 120)
+    const right = new Cushion(660, 420, 60, 120)
+
+    new Constraint(base, base.p0, left.p0, 0.1)
+    new Constraint(base, base.p1, right.p1, 0.1)
 
     const x = cwidth * 0.2
     const y = cheight * 0.5
