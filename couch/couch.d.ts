@@ -1,5 +1,6 @@
 /// <reference path="typings/index.d.ts" />
 
+/// <reference path="AAudio.ts" />
 /// <reference path="Body.ts" />
 /// <reference path="Constraint.ts" />
 /// <reference path="Cushion.ts" />

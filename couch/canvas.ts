@@ -49,3 +49,7 @@ function handleResize() {
 // handleResize()
 window.addEventListener('resize', handleResize)
 window.addEventListener('orientationchange', handleResize)
+
+canvas.addEventListener('contextmenu', event => {
+    event.preventDefault()
+})

@@ -19,8 +19,6 @@ endScreen.addEventListener('touchstart', cancel)
 resetButton.addEventListener('mousedown', reset)
 resetButton.addEventListener('touchstart', reset)
 
-const isMobile = navigator.userAgent.match(/Android|iPhone|iPad/i) != null
-
 function cancel(event: Event) {
     event.preventDefault()
     event.stopPropagation()
@@ -29,6 +27,8 @@ function cancel(event: Event) {
 function start() {
     container.removeChild(startScreen)
 
+    aa.play('new')
+
     if ((isMobile || cscale > 1) && document.body.requestFullscreen) {
         document.body.requestFullscreen()
     }
@@ -36,10 +36,14 @@ function start() {
 
 function gameover() {
     endScreen.style.display = 'block'
+
+    aa.play('win')
 }
 
 function reset() {
     endScreen.style.display = 'none'
+
+    aa.play('new')
 
     bodies = []
     vertices = []

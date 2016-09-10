@@ -48,6 +48,8 @@ function mainloop() {
 
             --count[b.n]
 
+            aa.play('die')
+
             addPieces = true
 
             --i
@@ -106,6 +108,8 @@ function mainloop() {
 
             count[b.n] -= 2
 
+            aa.play('bip')
+
             addPieces = true
 
             if (b.n == 1024) {
@@ -161,10 +165,15 @@ const addPiecesRateLimit = debounce(function () {
     if (count[2]) {
         new Piece(0.5 * cwidth)
     }
+    else if (count[4]) {
+        new Piece(0.5 * cwidth, -44, 4)
+    }
     else {
         new Piece(0.4 * cwidth)
         new Piece(0.6 * cwidth)
     }
+
+    aa.play('new')
 }, 300)
 
 function init() {
