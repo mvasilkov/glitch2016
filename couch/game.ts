@@ -11,6 +11,8 @@ startScreen.addEventListener('touchstart', cancel)
 startButton.addEventListener('mousedown', start)
 startButton.addEventListener('touchstart', start)
 
+const isMobile = navigator.userAgent.match(/Android|iPhone|iPad/i) != null
+
 function cancel(event: Event) {
     event.preventDefault()
     event.stopPropagation()
@@ -18,6 +20,10 @@ function cancel(event: Event) {
 
 function start() {
     container.removeChild(startScreen)
+
+    if ((isMobile || cscale > 1) && document.body.requestFullscreen) {
+        document.body.requestFullscreen()
+    }
 }
 
 function gameover() {

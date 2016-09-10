@@ -15,3 +15,11 @@ if (!Date.now) {
         return new Date().getTime()
     }
 }
+
+var proto = Element.prototype
+if (!proto.requestFullscreen) {
+    proto.requestFullscreen =
+        proto.mozRequestFullScreen ||
+        proto.msRequestFullscreen ||
+        proto.webkitRequestFullscreen
+}
