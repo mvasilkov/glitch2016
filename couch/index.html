@@ -7,7 +7,20 @@
         <link rel=stylesheet href=couch.css>
     </head>
     <body>
-        <canvas id=canvas></canvas>
+        <div id=container>
+            <canvas id=canvas></canvas>
+            <div id=home>
+                <h1>Couch 2048</h1>
+                <p>
+                    <b>How to play:</b><br>
+                    ⭐️ Drag pieces around<br>
+                    ⭐️ Stack those with the same number<br>
+                    ⭐️ Get to 2048 to win the game<br>
+                    ⭐️ REVEL IN GLORY <small>(optional but recommended)</small>
+                </p>
+                <div id=start>NEW GAME</div>
+            </div>
+        </div>
 
         <script src=Body.js></script>
         <script src=Constraint.js></script>
@@ -19,6 +32,7 @@
         <script src=canvas.js></script>
         <script src=collision.js></script>
         <script src=debounce.js></script>
+        <script src=game.js></script>
         <script src=main.js></script>
         <script src=pointer.js></script>
         <script src=polyfill.js></script>

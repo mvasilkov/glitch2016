@@ -7,7 +7,60 @@ html, body {
     -webkit-text-size-adjust: 100%;
 }
 
-#canvas {
+#container {
     background: #303030;
     position: absolute;
+}
+
+#canvas, #home {
+    display: block;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    -webkit-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+    -moz-user-select: none;
+    -moz-user-select: -moz-none;
+    -ms-user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+    width: 100%;
+}
+
+#home {
+    background: rgba(0,0,0,0.5);
+    box-sizing: border-box;
+    color: #fff;
+    cursor: default;
+    font: 300 64px/96px 'Segoe UI', 'Helvetica Neue', sans-serif;
+    height: 1080px;
+    padding: 0 100px;
+    transform-origin: 0 0;
+    width: 1920px;
+}
+
+#home > * {
+    margin: 40px 0;
+}
+
+#home h1 {
+    font: 300 96px/1 'Segoe UI', 'Helvetica Neue', sans-serif;
+    margin-top: 80px;
+}
+
+#start {
+    background: #E1FF5F;
+    border-radius: 2px;
+    color: #202020;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 48px;
+    font-weight: bold;
+    padding: 40px 120px;
+}
+
+#start:hover {
+    background: #fff;
 }

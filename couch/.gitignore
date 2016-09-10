@@ -8,6 +8,7 @@ Vec2.js
 canvas.js
 collision.js
 debounce.js
+game.js
 main.js
 pointer.js
 

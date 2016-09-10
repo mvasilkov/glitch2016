@@ -31,6 +31,29 @@ function mainloop() {
 
     let addPieces = false
 
+    for (let i = 0; i < bodies.length; ++i) {
+        const b = bodies[i]
+        if (!(b instanceof Piece)) continue
+
+        if (b.center.y >= cheight + b.r) {
+            constraints = constraints.filter(c => c.parent != b)
+            vertices = vertices.filter(p => p.parent != b)
+
+            if (draggingPoint && draggingPoint.parent == b) {
+                draggingPoint = null
+                pointer.dragging = false
+            }
+
+            bodies.splice(i, 1)
+
+            --count[b.n]
+
+            addPieces = true
+
+            --i
+        }
+    }
+
     for (let i = 0; i < bodies.length - 1; ++i) {
         const b = bodies[i]
         if (!(b instanceof Piece)) continue

@@ -6,8 +6,14 @@ const aspect = 16 / 9
 
 let cscale = 1
 
+const container = <HTMLElement>document.getElementById('container')
 const canvas = <HTMLCanvasElement>document.getElementById('canvas')
 const context = <CanvasRenderingContext2D>canvas.getContext('2d')
+
+let transformProperty = 'transform'
+if (!(transformProperty in container.style)) {
+    transformProperty = 'webkitTransform'
+}
 
 canvas.width = cwidth
 canvas.height = cheight
@@ -31,12 +37,14 @@ function handleResize() {
 
     cscale = cwidth / w
 
-    setSize(canvas, 'width', w)
-    setSize(canvas, 'height', h)
-    setSize(canvas, 'left', 0.5 * (window.innerWidth - w))
-    setSize(canvas, 'top', 0.5 * (window.innerHeight - h))
+    setSize(container, 'width', w)
+    setSize(container, 'height', h)
+    setSize(container, 'left', 0.5 * (window.innerWidth - w))
+    setSize(container, 'top', 0.5 * (window.innerHeight - h))
+
+    startScreen.style[<any>transformProperty] = `scale(${0.5 * w / cwidth})`
 }
 
-handleResize()
+// handleResize()
 window.addEventListener('resize', handleResize)
 window.addEventListener('orientationchange', handleResize)

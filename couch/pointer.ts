@@ -18,8 +18,8 @@ interface IPointerEvent {
 }
 
 function setPointerPosition(event: IPointerEvent) {
-    pointer.x = (event.clientX - canvas.offsetLeft) * cscale
-    pointer.y = (event.clientY - canvas.offsetTop) * cscale
+    pointer.x = (event.clientX - container.offsetLeft) * cscale
+    pointer.y = (event.clientY - container.offsetTop) * cscale
 }
 
 addEventListener('mousedown', event => {
