@@ -131,7 +131,7 @@ function mainloop() {
 }
 
 const addPiecesRateLimit = debounce(function () {
-    if (count[1]) {
+    if (count[2]) {
         new Piece(0.5 * cwidth)
     }
     else {
@@ -141,24 +141,21 @@ const addPiecesRateLimit = debounce(function () {
 }, 300)
 
 function init() {
-    for (let n = 1; n <= 2048; n *= 2) {
+    for (let n = 2; n <= 2048; n *= 2) {
         count[n] = 0
     }
 
-    const base = new Cushion(300, 480, 360, 60)
-    const left = new Cushion(240, 420, 60, 120)
-    const right = new Cushion(660, 420, 60, 120)
+    const couch = new Cushion(300, 480, 360, 60)
+    const armrest0 = new Cushion(240, 420, 60, 120)
+    const armrest1 = new Cushion(660, 420, 60, 120)
 
-    new Constraint(base, base.p0, left.p0, 0.1)
-    new Constraint(base, base.p1, right.p1, 0.1)
+    new Constraint(couch, couch.handle0, armrest0.handle0, 0.1)
+    new Constraint(couch, couch.handle1, armrest1.handle1, 0.1)
 
-    const x = cwidth * 0.2
     const y = cheight * 0.5
 
-    new Piece(x, y)
-    new Piece(x * 2, y)
-    new Piece(x * 3, y, 2)
-    new Piece(x * 4, y, 4)
+    new Piece(0.4 * cwidth, y)
+    new Piece(0.6 * cwidth, y)
 
     stats = new Stats
     document.body.appendChild(stats.dom)
