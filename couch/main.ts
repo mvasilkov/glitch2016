@@ -75,6 +75,7 @@ function mainloop() {
 
             if (draggingPoint && (draggingPoint.parent == b || draggingPoint.parent == other)) {
                 draggingPoint = null
+                pointer.dragging = false
             }
 
             bodies.splice(index, 1)
@@ -121,7 +122,6 @@ function mainloop() {
         context.beginPath()
         context.moveTo(draggingPoint.position.x, draggingPoint.position.y)
         context.lineTo(pointer.x, pointer.y)
-        context.lineWidth = 2
         context.strokeStyle = '#FFD600'
         context.stroke()
     }

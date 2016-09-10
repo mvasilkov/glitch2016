@@ -18,10 +18,10 @@ class Piece extends Body {
     r: number
 
     constructor(x: number, y: number = -40, n: number = 2, append: boolean = true) {
-        super(1 + 0.5 * Math.log10(n))
+        super(1 + 0.2 * Math.log10(n))
 
         ++count[this.n = n]
-        this.r = 40 + 5 * (Math.log2(n) - 1)
+        this.r = 40 + 4 * (Math.log2(n) - 1)
 
         const nPoints = numberOfPoints(this.r)
         const aStep = 2 * Math.PI / nPoints
@@ -61,6 +61,17 @@ class Piece extends Body {
 
         context.fillStyle = FILL_COLOR[this.n]
         context.fill()
+
+        context.save()
+
+        context.translate(this.center.x, this.center.y)
+        context.rotate(Math.atan2(p0.y - this.center.y, p0.x - this.center.x))
+
+        context.font = 'bold ' + (0.1 * this.r + 28) + "px 'Segoe UI','Helvetica Neue',sans-serif"
+        context.fillStyle = this.n > 4 ? '#f9f6f2' : '#776e65'
+        context.fillText('' + this.n, 0, 0)
+
+        context.restore()
 
         this.drag()
     }

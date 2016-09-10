@@ -12,6 +12,10 @@ const context = <CanvasRenderingContext2D>canvas.getContext('2d')
 canvas.width = cwidth
 canvas.height = cheight
 
+context.lineWidth = 2
+context.textAlign = 'center'
+context.textBaseline = 'middle'
+
 function setSize(x: HTMLElement, property: string, value: number) {
     x.style[<any>property] = `${value}px`
 }
