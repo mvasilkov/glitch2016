@@ -107,6 +107,10 @@ function mainloop() {
             count[b.n] -= 2
 
             addPieces = true
+
+            if (b.n == 1024) {
+                gameover()
+            }
         }
     }
 
@@ -180,6 +184,8 @@ function init() {
     new Piece(0.4 * cwidth, y)
     new Piece(0.6 * cwidth, y)
 
-    stats = new Stats
-    document.body.appendChild(stats.dom)
+    if (stats == null) {
+        stats = new Stats
+        document.body.appendChild(stats.dom)
+    }
 }

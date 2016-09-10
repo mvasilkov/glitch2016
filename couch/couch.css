@@ -12,7 +12,7 @@ html, body {
     position: absolute;
 }
 
-#canvas, #home {
+#canvas, #home, #end {
     display: block;
     height: 100%;
     left: 0;
@@ -29,7 +29,7 @@ html, body {
     width: 100%;
 }
 
-#home {
+#home, #end {
     background: rgba(0,0,0,0.5);
     box-sizing: border-box;
     color: #fff;
@@ -41,16 +41,18 @@ html, body {
     width: 1920px;
 }
 
-#home > * {
+#home > *, #end > * {
     margin: 40px 0;
 }
 
-#home h1 {
+h1 {
     font: 300 96px/1 'Segoe UI', 'Helvetica Neue', sans-serif;
     margin-top: 80px;
 }
 
-#start {
+#start, #reset {
+    -webkit-animation: blink .7s steps(2, start) infinite;
+    animation: blink .7s steps(2, start) infinite;
     background: #E1FF5F;
     border-radius: 2px;
     color: #202020;
@@ -58,9 +60,23 @@ html, body {
     display: inline-block;
     font-size: 48px;
     font-weight: bold;
+    outline: 4px none;
+    outline-offset: 4px;
     padding: 40px 120px;
 }
 
-#start:hover {
+#start:hover, #reset:hover {
     background: #fff;
+}
+
+@-webkit-keyframes blink {
+    to {
+        outline: 4px solid #E1FF5F;
+    }
+}
+
+@keyframes blink {
+    to {
+        outline: 4px solid #E1FF5F;
+    }
 }

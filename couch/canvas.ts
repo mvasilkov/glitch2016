@@ -42,7 +42,8 @@ function handleResize() {
     setSize(container, 'left', 0.5 * (window.innerWidth - w))
     setSize(container, 'top', 0.5 * (window.innerHeight - h))
 
-    startScreen.style[<any>transformProperty] = `scale(${0.5 * w / cwidth})`
+    startScreen.style[<any>transformProperty] =
+        endScreen.style[<any>transformProperty] = `scale(${0.5 * w / cwidth})`
 }
 
 // handleResize()
