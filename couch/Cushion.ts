@@ -6,7 +6,7 @@ class Cushion extends Body {
 
     static chamfer = 10
 
-    constructor(x: number, y: number, width: number, height: number) {
+    constructor(x: number, y: number, width: number, height: number, append: boolean = true) {
         super(250)
 
         const p0 = this.handle0 = new Point(this, x, y + Cushion.chamfer)
@@ -31,10 +31,12 @@ class Cushion extends Body {
         new Constraint(this, p2, p5, 0.1)
         new Constraint(this, p3, p5, 0.1)
 
-        bodies.push(this)
+        if (append) {
+            bodies.push(this)
+        }
     }
 
-    draw() {
+    draw(context: CanvasRenderingContext2D, color?: string) {
         context.beginPath()
 
         let p0 = this.positions[0]
@@ -55,7 +57,7 @@ class Cushion extends Body {
             context.quadraticCurveTo(p0.x, p0.y, 0.5 * (p0.x + p1.x), 0.5 * (p0.y + p1.y))
         }
 
-        context.fillStyle = '#00B0FF'
+        context.fillStyle = color || '#00B0FF'
         context.fill()
     }
 }

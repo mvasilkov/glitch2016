@@ -46,7 +46,7 @@ class Piece extends Body {
         }
     }
 
-    draw() {
+    draw(context: CanvasRenderingContext2D) {
         context.beginPath()
 
         let p0 = this.positions[0]

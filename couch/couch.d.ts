@@ -8,6 +8,7 @@
 /// <reference path="Point.ts" />
 /// <reference path="StaticPoint.ts" />
 /// <reference path="Vec2.ts" />
+/// <reference path="background.ts" />
 /// <reference path="canvas.ts" />
 /// <reference path="collision.ts" />
 /// <reference path="debounce.ts" />

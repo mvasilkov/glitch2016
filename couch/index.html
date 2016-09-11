@@ -9,6 +9,7 @@
     </head>
     <body>
         <div id=container>
+            <canvas id=backcanvas></canvas>
             <canvas id=canvas></canvas>
             <div id=home>
                 <h1>Couch 2048</h1>
@@ -42,6 +43,7 @@
         <script src=Point.js></script>
         <script src=StaticPoint.js></script>
         <script src=Vec2.js></script>
+        <script src=background.js></script>
         <script src=canvas.js></script>
         <script src=collision.js></script>
         <script src=debounce.js></script>
@@ -54,7 +56,10 @@
 
         <script>
             init()
+            initBackground()
+
             requestAnimationFrame(mainloop)
+            paintBackground()
         </script>
     </body>
 </html>

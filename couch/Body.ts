@@ -50,7 +50,7 @@ class Body {
         }
     }
 
-    draw() {
+    draw(context: CanvasRenderingContext2D) {
         context.beginPath()
 
         const {p0} = this.boundaries[0]

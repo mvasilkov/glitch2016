@@ -6,6 +6,7 @@ Piece.js
 Point.js
 StaticPoint.js
 Vec2.js
+background.js
 canvas.js
 collision.js
 debounce.js

@@ -1,5 +1,5 @@
 html, body {
-    background: #101010;
+    background: #263238;
     height: 100%;
     margin: 0;
     overflow: hidden;
@@ -8,11 +8,10 @@ html, body {
 }
 
 #container {
-    background: #303030;
     position: absolute;
 }
 
-#canvas, #home, #end {
+#backcanvas, #canvas, #home, #end {
     display: block;
     height: 100%;
     left: 0;
@@ -27,6 +26,10 @@ html, body {
     -webkit-user-select: none;
     user-select: none;
     width: 100%;
+}
+
+#backcanvas {
+    background: linear-gradient(to top, #37474F, #546E7A);
 }
 
 #home, #end {

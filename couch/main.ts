@@ -148,7 +148,7 @@ function mainloop() {
     }
 
     for (let b of bodies) {
-        b.draw()
+        b.draw(context)
     }
 
     if (draggingPoint) {
@@ -163,48 +163,56 @@ function mainloop() {
     requestAnimationFrame(mainloop)
 }
 
+function spawnLocation() {
+    return (Math.random() * 0.3 + 0.35) * cwidth
+}
+
 const addPiecesRateLimit = debounce(function () {
     const has256 = count[256] || count[512] || count[1024]
 
     if (count[2]) {
-        new Piece(0.5 * cwidth)
+        new Piece(spawnLocation())
     }
     else if (count[4]) {
-        new Piece(0.5 * cwidth, -44, 4)
+        new Piece(spawnLocation(), -44, 4)
     }
     else if (has256) {
         if (count[8]) {
-            new Piece(0.5 * cwidth, -48, 8)
+            new Piece(spawnLocation(), -48, 8)
         }
         else {
-            new Piece(0.4 * cwidth, -44, 4)
-            new Piece(0.6 * cwidth, -44, 4)
+            new Piece(0.35 * cwidth, -44, 4)
+            new Piece(0.65 * cwidth, -44, 4)
         }
     }
     else {
-        new Piece(0.4 * cwidth)
-        new Piece(0.6 * cwidth)
+        new Piece(0.35 * cwidth)
+        new Piece(0.65 * cwidth)
     }
 
     aa.play('new')
 }, 300)
+
+let couch: Cushion | null = null
+let armrest0: Cushion | null = null
+let armrest1: Cushion | null = null
 
 function init() {
     for (let n = 2; n <= 2048; n *= 2) {
         count[n] = 0
     }
 
-    const couch = new Cushion(280, 480, 400, 60)
-    const armrest0 = new Cushion(220, 420, 60, 120)
-    const armrest1 = new Cushion(680, 420, 60, 120)
+    couch = new Cushion(280, 480, 400, 60)
+    armrest0 = new Cushion(220, 420, 60, 120)
+    armrest1 = new Cushion(680, 420, 60, 120)
 
     new Constraint(couch, couch.handle0, armrest0.handle0, 0.1)
     new Constraint(couch, couch.handle1, armrest1.handle1, 0.1)
 
     const y = cheight * 0.5
 
-    new Piece(0.4 * cwidth, y)
-    new Piece(0.6 * cwidth, y)
+    new Piece(0.35 * cwidth, y)
+    new Piece(0.65 * cwidth, y)
 
     if (stats == null) {
         stats = new Stats

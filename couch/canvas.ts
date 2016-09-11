@@ -7,7 +7,9 @@ const aspect = 16 / 9
 let cscale = 1
 
 const container = <HTMLElement>document.getElementById('container')
+const backcanvas = <HTMLCanvasElement>document.getElementById('backcanvas')
 const canvas = <HTMLCanvasElement>document.getElementById('canvas')
+const backcontext = <CanvasRenderingContext2D>backcanvas.getContext('2d')
 const context = <CanvasRenderingContext2D>canvas.getContext('2d')
 
 let transformProperty = 'transform'
@@ -15,8 +17,8 @@ if (!(transformProperty in container.style)) {
     transformProperty = 'webkitTransform'
 }
 
-canvas.width = cwidth
-canvas.height = cheight
+backcanvas.width = canvas.width = cwidth
+backcanvas.height = canvas.height = cheight
 
 context.lineWidth = 2
 context.textAlign = 'center'
