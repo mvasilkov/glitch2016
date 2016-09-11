@@ -42,11 +42,14 @@ function handleResize() {
     setSize(container, 'left', 0.5 * (window.innerWidth - w))
     setSize(container, 'top', 0.5 * (window.innerHeight - h))
 
-    startScreen.style[<any>transformProperty] =
-        endScreen.style[<any>transformProperty] = `scale(${0.5 * w / cwidth})`
+    const scale = 0.5 * w / cwidth
+    const scale3d = `scale3d(${scale},${scale},1)`
+
+    startScreen.style[<any>transformProperty] = scale3d
+    endScreen.style[<any>transformProperty] = scale3d
 }
 
-// handleResize()
+//handleResize()
 window.addEventListener('resize', handleResize)
 window.addEventListener('orientationchange', handleResize)
 

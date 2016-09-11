@@ -6,7 +6,7 @@ const kNumIterations = 40
 const kFriction = 0.9
 const kFrictionGround = 0.6
 const kViscosity = 1
-const kForceDrag = 0.1
+const kForceDrag = 0.24
 
 let bodies = [] as Body[]
 let vertices = [] as Point[]
@@ -18,6 +18,8 @@ const register0 = new Vec2
 const register1 = new Vec2
 
 const count: { [n: number]: number } = {}
+
+const numberOfCushions = 3
 
 let stats: Stats
 
@@ -31,9 +33,9 @@ function mainloop() {
 
     let addPieces = false
 
-    for (let i = 0; i < bodies.length; ++i) {
-        const b = bodies[i]
-        if (!(b instanceof Piece)) continue
+    for (let i = numberOfCushions; i < bodies.length; ++i) {
+        const b = bodies[i] as Piece
+        //if (!(b instanceof Piece)) continue
 
         if (b.center.y >= cheight + b.r) {
             constraints = constraints.filter(c => c.parent != b)
@@ -56,9 +58,9 @@ function mainloop() {
         }
     }
 
-    for (let i = 0; i < bodies.length - 1; ++i) {
-        const b = bodies[i]
-        if (!(b instanceof Piece)) continue
+    for (let i = numberOfCushions; i < bodies.length - 1; ++i) {
+        const b = bodies[i] as Piece
+        //if (!(b instanceof Piece)) continue
 
         const attractDistance = 2.5 * b.r
         let minDistance = 99999
@@ -66,8 +68,8 @@ function mainloop() {
         let index = 0
 
         for (let j = i + 1; j < bodies.length; ++j) {
-            const bb = bodies[j]
-            if (!(bb instanceof Piece)) continue
+            const bb = bodies[j] as Piece
+            //if (!(bb instanceof Piece)) continue
             if (b.n != bb.n) continue
 
             const distance = b.center.distance(bb.center)
@@ -162,11 +164,22 @@ function mainloop() {
 }
 
 const addPiecesRateLimit = debounce(function () {
+    const has256 = count[256] || count[512] || count[1024]
+
     if (count[2]) {
         new Piece(0.5 * cwidth)
     }
     else if (count[4]) {
         new Piece(0.5 * cwidth, -44, 4)
+    }
+    else if (has256) {
+        if (count[8]) {
+            new Piece(0.5 * cwidth, -48, 8)
+        }
+        else {
+            new Piece(0.4 * cwidth, -44, 4)
+            new Piece(0.6 * cwidth, -44, 4)
+        }
     }
     else {
         new Piece(0.4 * cwidth)
@@ -181,9 +194,9 @@ function init() {
         count[n] = 0
     }
 
-    const couch = new Cushion(300, 480, 360, 60)
-    const armrest0 = new Cushion(240, 420, 60, 120)
-    const armrest1 = new Cushion(660, 420, 60, 120)
+    const couch = new Cushion(280, 480, 400, 60)
+    const armrest0 = new Cushion(220, 420, 60, 120)
+    const armrest1 = new Cushion(680, 420, 60, 120)
 
     new Constraint(couch, couch.handle0, armrest0.handle0, 0.1)
     new Constraint(couch, couch.handle1, armrest1.handle1, 0.1)

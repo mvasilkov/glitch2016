@@ -16,12 +16,14 @@ function numberOfPoints(r: number) {
 class Piece extends Body {
     n: number
     r: number
+    font: string
 
     constructor(x: number, y: number = -40, n: number = 2, append: boolean = true) {
         super(1 + 0.2 * Math.log10(n))
 
         ++count[this.n = n]
         this.r = 40 + 4 * (Math.log2(n) - 1)
+        this.font = `bold ${0.1 * this.r + 28}px 'Segoe UI','Helvetica Neue',sans-serif`
 
         const nPoints = numberOfPoints(this.r)
         const aStep = 2 * Math.PI / nPoints
@@ -67,7 +69,7 @@ class Piece extends Body {
         context.translate(this.center.x, this.center.y)
         context.rotate(Math.atan2(p0.y - this.center.y, p0.x - this.center.x))
 
-        context.font = 'bold ' + (0.1 * this.r + 28) + "px 'Segoe UI','Helvetica Neue',sans-serif"
+        context.font = this.font
         context.fillStyle = this.n > 4 ? '#f9f6f2' : '#776e65'
         context.fillText('' + this.n, 0, 0)
 
