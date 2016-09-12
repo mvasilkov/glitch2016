@@ -2,7 +2,5 @@
 
 **How to build:**
 
-    npm i -g typescript@next typings
-    npm install
-    typings install
+    npm i -g typescript@next
     tsc --strictNullChecks --target ES5 --watch *.ts

@@ -16,9 +16,9 @@ function paintBackground() {
 
     backcontext.translate(0, 1)
 
-    couch!.draw(backcontext, 'rgba(55,71,79,0.5)')
-    armrest0!.draw(backcontext, 'rgba(55,71,79,0.5)')
-    armrest1!.draw(backcontext, 'rgba(55,71,79,0.5)')
+    couch!.draw(backcontext, 'rgba(55,71,79,0.4)')
+    armrest0!.draw(backcontext, 'rgba(55,71,79,0.4)')
+    armrest1!.draw(backcontext, 'rgba(55,71,79,0.4)')
 
     backcontext.restore()
 }

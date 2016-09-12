@@ -21,10 +21,7 @@ const count: { [n: number]: number } = {}
 
 const numberOfCushions = 3
 
-let stats: Stats
-
 function mainloop() {
-    stats.begin()
     context.clearRect(0, 0, cwidth, cheight)
 
     for (let p of vertices) {
@@ -159,7 +156,6 @@ function mainloop() {
         context.stroke()
     }
 
-    stats.end()
     requestAnimationFrame(mainloop)
 }
 
@@ -213,9 +209,4 @@ function init() {
 
     new Piece(0.35 * cwidth, y)
     new Piece(0.65 * cwidth, y)
-
-    if (stats == null) {
-        stats = new Stats
-        document.body.appendChild(stats.dom)
-    }
 }

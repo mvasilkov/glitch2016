@@ -1,7 +1,7 @@
 /// <reference path="couch.d.ts" />
 
 interface Window {
-    jsfxr(settings: (number | undefined)[]): string
+    SOUND(settings: (number | undefined)[]): string
 }
 
 interface AASound {
@@ -26,7 +26,7 @@ class AAudio {
 
         for (let i = 0; i < count; ++i) {
             const audio = new Audio
-            audio.src = window.jsfxr(settings)
+            audio.src = window.SOUND(settings)
             this.sounds[name].pool.push(audio)
         }
     }
