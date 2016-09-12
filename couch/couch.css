@@ -32,7 +32,7 @@ html, body {
 }
 
 #backcanvas {
-    background: linear-gradient(to top, #37474F, #546E7A);
+    background: #455A64;
 }
 
 #load, #home, #end {

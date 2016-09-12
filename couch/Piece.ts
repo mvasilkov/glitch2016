@@ -46,7 +46,7 @@ class Piece extends Body {
         }
     }
 
-    draw(context: CanvasRenderingContext2D) {
+    paint(context: CanvasRenderingContext2D) {
         context.beginPath()
 
         let p0 = this.positions[0]
@@ -59,6 +59,33 @@ class Piece extends Body {
             p1 = this.positions[(i + 1) % this.positions.length]
 
             context.quadraticCurveTo(p0.x, p0.y, 0.5 * (p0.x + p1.x), 0.5 * (p0.y + p1.y))
+        }
+
+        context.fillStyle = FILL_COLOR[this.n]
+        context.fill()
+
+        context.save()
+
+        context.translate(this.center.x, this.center.y)
+        context.rotate(Math.atan2(p0.y - this.center.y, p0.x - this.center.x))
+
+        context.font = this.font
+        context.fillStyle = this.n > 4 ? '#f9f6f2' : '#776e65'
+        context.fillText('' + this.n, 0, 0)
+
+        context.restore()
+
+        this.drag()
+    }
+
+    paintLow(context: CanvasRenderingContext2D) {
+        context.beginPath()
+
+        const {p0} = this.boundaries[0]
+        context.moveTo(p0.x, p0.y)
+
+        for (let {p1} of this.boundaries) {
+            context.lineTo(p1.x, p1.y)
         }
 
         context.fillStyle = FILL_COLOR[this.n]

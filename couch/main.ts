@@ -145,7 +145,7 @@ function mainloop() {
     }
 
     for (let b of bodies) {
-        b.draw(context)
+        b.paint(context)
     }
 
     if (draggingPoint) {

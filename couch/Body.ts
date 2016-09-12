@@ -1,6 +1,6 @@
 /// <reference path="couch.d.ts" />
 
-class Body {
+abstract class Body {
     vertices: Point[]
     positions: Vec2[]
     constraints: Constraint[]
@@ -50,24 +50,7 @@ class Body {
         }
     }
 
-    draw(context: CanvasRenderingContext2D) {
-        context.beginPath()
-
-        const {p0} = this.boundaries[0]
-        context.moveTo(p0.x, p0.y)
-
-        for (let {p1} of this.boundaries) {
-            context.lineTo(p1.x, p1.y)
-        }
-
-        context.fillStyle = '#AEEA00'
-        context.fill()
-
-        this.drag()
-
-        context.fillStyle = '#FF1744'
-        context.fillRect(this.center.x - 1, this.center.y - 1, 2, 2)
-    }
+    abstract paint(context: CanvasRenderingContext2D): void
 
     drag() {
         if (pointer.dragging && !draggingPoint &&
