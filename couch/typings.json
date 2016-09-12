@@ -1,5 +1,0 @@
-{
-  "globalDependencies": {
-    "stats": "registry:dt/stats#0.16.0+20160505160752"
-  }
-}

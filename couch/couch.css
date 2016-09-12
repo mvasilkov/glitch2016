@@ -11,7 +11,16 @@ html, body {
     position: absolute;
 }
 
-#backcanvas, #canvas, #home, #end {
+#container > *, label {
+    -moz-user-select: none;
+    -moz-user-select: -moz-none;
+    -ms-user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+#backcanvas, #canvas, #load, #home, #end {
     display: block;
     height: 100%;
     left: 0;
@@ -19,20 +28,14 @@ html, body {
     top: 0;
     -webkit-transform: translate3d(0,0,0);
     transform: translate3d(0,0,0);
-    -moz-user-select: none;
-    -moz-user-select: -moz-none;
-    -ms-user-select: none;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    user-select: none;
     width: 100%;
 }
 
 #backcanvas {
-    background: linear-gradient(to top, #37474F, #546E7A);
+    background: #455A64;
 }
 
-#home, #end {
+#load, #home, #end {
     background: rgba(0,0,0,0.5);
     box-sizing: border-box;
     color: #fff;
@@ -44,7 +47,11 @@ html, body {
     width: 1920px;
 }
 
-#home > *, #end > * {
+#load + #home {
+    display: none;
+}
+
+#load > *, #home > *, #end > * {
     margin: 40px 0;
 }
 
@@ -82,4 +89,73 @@ h1 {
     to {
         outline: 4px solid #E1FF5F;
     }
+}
+
+#menu {
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translate3d(0,0,0);
+    width: 550px;
+}
+
+.opt, .opt::after, .opt::before {
+    box-sizing: border-box;
+}
+
+.opt {
+    /* -moz-appearance: none; */
+    -webkit-appearance: none;
+    height: 48px;
+    margin: 0 10px;
+    outline: 0;
+    position: relative;
+    width: 80px;
+}
+
+.opt::after, .opt::before {
+    border-radius: 100px;
+    content: '';
+    display: inline-block;
+    transition: all 0.2s;
+}
+
+.opt::after {
+    background: #fff;
+    border: 2px solid #607d8b;
+    height: 40px;
+    left: 4px;
+    position: absolute;
+    top: 4px;
+    width: 40px;
+}
+
+.opt::before {
+    background: #b0bec5;
+    height: 48px;
+    width: 80px;
+}
+
+.opt:checked::after {
+    left: 36px;
+}
+
+.opt:checked::before {
+    background: #c6ff00;
+}
+
+label {
+    color: #eeff41;
+}
+
+body.mobile #menu > * {
+    display: none;
+}
+
+#q {
+    display: inline-block !important;
+}
+
+#q + label {
+    display: inline !important;
 }

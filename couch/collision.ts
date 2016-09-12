@@ -34,7 +34,10 @@ const [sat, resolve] = (function () {
         }
 
         if (satBoundary.parent != b1) {
-            [b0, b1] = [b1, b0]
+            // [b0, b1] = [b1, b0]
+            const t = b0
+            b0 = b1
+            b1 = t
         }
 
         register0.setSubtract(b0.center, b1.center)

@@ -36,7 +36,7 @@ class Cushion extends Body {
         }
     }
 
-    draw(context: CanvasRenderingContext2D, color?: string) {
+    paint(context: CanvasRenderingContext2D, color?: string) {
         context.beginPath()
 
         let p0 = this.positions[0]
@@ -55,6 +55,17 @@ class Cushion extends Body {
             p1 = this.positions[(i + 1) % this.positions.length]
 
             context.quadraticCurveTo(p0.x, p0.y, 0.5 * (p0.x + p1.x), 0.5 * (p0.y + p1.y))
+        }
+
+        context.fillStyle = color || '#00B0FF'
+        context.fill()
+    }
+
+    paintLow(context: CanvasRenderingContext2D, color?: string) {
+        context.beginPath()
+
+        for (let p of this.positions) {
+            context.lineTo(p.x, p.y)
         }
 
         context.fillStyle = color || '#00B0FF'

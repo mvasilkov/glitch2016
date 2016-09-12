@@ -13,6 +13,7 @@ debounce.js
 game.js
 main.js
 pointer.js
+run.js
 
 node_modules/
 typings/

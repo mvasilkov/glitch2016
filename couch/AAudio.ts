@@ -1,7 +1,7 @@
 /// <reference path="couch.d.ts" />
 
 interface Window {
-    jsfxr(settings: (number | undefined)[]): string
+    SOUND(settings: (number | undefined)[]): string
 }
 
 interface AASound {
@@ -11,9 +11,11 @@ interface AASound {
 }
 
 class AAudio {
+    on: boolean
     sounds: { [name: string]: AASound }
 
     constructor() {
+        this.on = true
         this.sounds = {}
     }
 
@@ -26,12 +28,14 @@ class AAudio {
 
         for (let i = 0; i < count; ++i) {
             const audio = new Audio
-            audio.src = window.jsfxr(settings)
+            audio.src = window.SOUND(settings)
             this.sounds[name].pool.push(audio)
         }
     }
 
     play(name: string) {
+        if (!this.on) return
+
         const sound: AASound = this.sounds[name]
 
         sound.pool[sound.tick].play()
@@ -47,8 +51,7 @@ const aa = new AAudio
 const isMobile = navigator.userAgent.match(/Android|iPhone|iPad/i) != null
 
 if (isMobile) {
-    aa.play = function () {
-    }
+    aa.on = false
 }
 else {
     aa.add('bip', 9, [1,,0.1241,,0.1855,0.5336,,,,,,,,,,,,,1,,,0.1,,0.64])

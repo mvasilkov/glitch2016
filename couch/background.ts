@@ -7,18 +7,22 @@ function initBackground() {
 }
 
 function paintBackground() {
-    backCushion!.draw(backcontext, '#0091EA')
+    backcontext.clearRect(0, 0, cwidth, cheight)
 
     backcontext.save()
 
-    backcontext.shadowColor = '#000'
+    backcontext.shadowColor = 'rgba(0,0,0,0.4)'
     backcontext.shadowBlur = 25
+
+    backCushion!.paint(backcontext, '#0091EA')
+
+    backcontext.shadowColor = '#000'
 
     backcontext.translate(0, 1)
 
-    couch!.draw(backcontext, 'rgba(55,71,79,0.5)')
-    armrest0!.draw(backcontext, 'rgba(55,71,79,0.5)')
-    armrest1!.draw(backcontext, 'rgba(55,71,79,0.5)')
+    couch!.paint(backcontext, 'rgba(55,71,79,0.4)')
+    armrest0!.paint(backcontext, 'rgba(55,71,79,0.4)')
+    armrest1!.paint(backcontext, 'rgba(55,71,79,0.4)')
 
     backcontext.restore()
 }
