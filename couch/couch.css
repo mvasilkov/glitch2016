@@ -58,6 +58,11 @@ html, body {
 h1 {
     font: 300 96px/1 'Segoe UI', 'Helvetica Neue', sans-serif;
     margin-top: 80px;
+    text-shadow: 2px 0 0 #f00, -2px 0 0 #0ff;
+}
+
+p {
+    text-shadow: 1px 0 0 #f00, -1px 0 0 #0ff;
 }
 
 #start, #reset {

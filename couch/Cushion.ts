@@ -44,15 +44,15 @@ class Cushion extends Body {
 
         context.moveTo(0.5 * (p0.x + p1.x), 0.5 * (p0.y + p1.y))
 
-        for (let i = 1; i <= this.positions.length; ++i) {
+        for (let i = 1; i <= 6 /*this.positions.length*/; ++i) {
             // bottom part
             if (i == 4 || i == 5) {
                 context.lineTo(this.positions[i].x, this.positions[i].y)
                 continue
             }
 
-            p0 = this.positions[i % this.positions.length]
-            p1 = this.positions[(i + 1) % this.positions.length]
+            p0 = this.positions[i % 6 /*this.positions.length*/]
+            p1 = this.positions[(i + 1) % 6 /*this.positions.length*/]
 
             context.quadraticCurveTo(p0.x, p0.y, 0.5 * (p0.x + p1.x), 0.5 * (p0.y + p1.y))
         }
