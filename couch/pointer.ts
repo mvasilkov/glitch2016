@@ -43,7 +43,10 @@ addEventListener('mouseup', event => {
 })
 
 document.addEventListener('touchstart', event => {
-    event.preventDefault()
+    const target = <HTMLElement>event.target
+    if (target.tagName != 'INPUT' && target.tagName != 'LABEL') {
+        event.preventDefault()
+    }
 
     pointer.dragging = true
     setPointerPosition(event.targetTouches[0])
@@ -56,15 +59,11 @@ document.addEventListener('touchmove', event => {
 })
 
 document.addEventListener('touchend', event => {
-    event.preventDefault()
-
     pointer.dragging = false
     draggingPoint = null
 })
 
 document.addEventListener('touchcancel', event => {
-    event.preventDefault()
-
     pointer.dragging = false
     draggingPoint = null
 })

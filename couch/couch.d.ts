@@ -12,6 +12,7 @@
 /// <reference path="debounce.ts" />
 /// <reference path="game.ts" />
 /// <reference path="main.ts" />
+/// <reference path="music/sonant.d.ts" />
 /// <reference path="pointer.ts" />
 /// <reference path="polyfill.d.ts" />
 /// <reference path="run.ts" />

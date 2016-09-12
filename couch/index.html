@@ -11,6 +11,9 @@
         <div id=container>
             <canvas id=backcanvas></canvas>
             <canvas id=canvas></canvas>
+            <div id=load>
+                <h1>Loading</h1>
+            </div>
             <div id=home>
                 <h1>Couch 2048</h1>
                 <p>
@@ -21,6 +24,11 @@
                     ⭐️ REVEL IN GLORY <small>(optional but recommended)</small>
                 </p>
                 <div id=start>NEW GAME</div>
+                <div id=menu>
+                    <input type=checkbox class=opt id=m checked><label for=m> Music</label><br>
+                    <input type=checkbox class=opt id=s checked><label for=s> Sound FX</label><br>
+                    <input type=checkbox class=opt id=q checked><label for=q> High Quality</label>
+                </div>
             </div>
             <div id=end style=display:none>
                 <h1>You win</h1>
@@ -49,6 +57,8 @@
         <script src=debounce.js></script>
         <script src=game.js></script>
         <script src=main.js></script>
+        <script src=music/sonant.js></script>
+        <script src=music/song.js></script>
         <script src=pointer.js></script>
         <script src=polyfill.js></script>
         <script src=run.js></script>

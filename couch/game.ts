@@ -1,11 +1,10 @@
 /// <reference path="couch.d.ts" />
 
+const loadingScreen = <HTMLElement>document.getElementById('load')
 const startScreen = <HTMLElement>document.getElementById('home')
 const startButton = <HTMLElement>document.getElementById('start')
 const endScreen = <HTMLElement>document.getElementById('end')
 const resetButton = <HTMLElement>document.getElementById('reset')
-
-handleResize()
 
 startScreen.addEventListener('mousedown', cancel)
 startScreen.addEventListener('touchstart', cancel)
@@ -20,8 +19,11 @@ resetButton.addEventListener('mousedown', reset)
 resetButton.addEventListener('touchstart', reset)
 
 function cancel(event: Event) {
-    event.preventDefault()
-    event.stopPropagation()
+    const target = <HTMLElement>event.target
+    if (target.tagName != 'INPUT' && target.tagName != 'LABEL') {
+        event.preventDefault()
+        event.stopPropagation()
+    }
 }
 
 function start() {

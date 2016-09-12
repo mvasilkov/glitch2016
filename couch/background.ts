@@ -7,12 +7,14 @@ function initBackground() {
 }
 
 function paintBackground() {
-    backCushion!.draw(backcontext, '#0091EA')
-
     backcontext.save()
 
-    backcontext.shadowColor = '#000'
+    backcontext.shadowColor = 'rgba(0,0,0,0.4)'
     backcontext.shadowBlur = 25
+
+    backCushion!.draw(backcontext, '#0091EA')
+
+    backcontext.shadowColor = '#000'
 
     backcontext.translate(0, 1)
 
