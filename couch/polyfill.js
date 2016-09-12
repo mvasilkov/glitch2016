@@ -16,10 +16,9 @@ if (!Date.now) {
     }
 }
 
-var proto = Element.prototype
-if (!proto.requestFullscreen) {
-    proto.requestFullscreen =
-        proto.mozRequestFullScreen ||
-        proto.msRequestFullscreen ||
-        proto.webkitRequestFullscreen
+if (!Element.prototype.requestFullscreen) {
+    Element.prototype.requestFullscreen =
+        Element.prototype.mozRequestFullScreen ||
+        Element.prototype.msRequestFullscreen ||
+        Element.prototype.webkitRequestFullscreen
 }

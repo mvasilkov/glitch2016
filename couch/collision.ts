@@ -82,30 +82,33 @@ const [sat, resolve] = (function () {
         m0 /= tm * 2
         m1 /= tm
 
-        p0.x -= register0.x * (1 - t) * u * m0
-        p0.y -= register0.y * (1 - t) * u * m0
-        p1.x -= register0.x * t * u * m0
-        p1.y -= register0.y * t * u * m0
+        const k0 = (1 - t) * u * m0
+        const k1 = t * u * m0
+
+        p0.x -= register0.x * k0
+        p0.y -= register0.y * k0
+        p1.x -= register0.x * k1
+        p1.y -= register0.y * k1
 
         pp.x += register0.x * m1
         pp.y += register0.y * m1
 
-        if (kFriction) {
-            register0.set(
-                pp.x - po.x - (p0.x + p1.x - o0.x - o1.x) * 0.5,
-                pp.y - po.y - (p0.y + p1.y - o0.y - o1.y) * 0.5
-            )
-            register1.set(-satAxis.y, satAxis.x)
-            register0.setMultiplyScalar(register1, register0.dot(register1))
+        //if (kFriction) {
+        register0.set(
+            pp.x - po.x - (p0.x + p1.x - o0.x - o1.x) * 0.5,
+            pp.y - po.y - (p0.y + p1.y - o0.y - o1.y) * 0.5
+        )
+        register1.set(-satAxis.y, satAxis.x)
+        register0.setMultiplyScalar(register1, register0.dot(register1))
 
-            o0.x -= register0.x * (1 - t) * kFriction * u * m0
-            o0.y -= register0.y * (1 - t) * kFriction * u * m0
-            o1.x -= register0.x * t * kFriction * u * m0
-            o1.y -= register0.y * t * kFriction * u * m0
+        o0.x -= register0.x * kFriction * k0
+        o0.y -= register0.y * kFriction * k0
+        o1.x -= register0.x * kFriction * k1
+        o1.y -= register0.y * kFriction * k1
 
-            po.x += register0.x * kFriction * m1
-            po.y += register0.y * kFriction * m1
-        }
+        po.x += register0.x * kFriction * m1
+        po.y += register0.y * kFriction * m1
+        //}
     }
 
     return [sat, resolve]

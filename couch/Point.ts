@@ -21,8 +21,8 @@ class Point {
         const x = p.x
         const y = p.y
 
-        p.x += (kViscosity * p.x - kViscosity * o.x)
-        p.y += (kViscosity * p.y - kViscosity * o.y) + kGravity
+        p.x += p.x - o.x
+        p.y += p.y - o.y + kGravity
 
         o.set(x, y)
 

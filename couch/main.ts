@@ -5,7 +5,6 @@ const kAttractiveForce = 0.1
 const kNumIterations = 40
 const kFriction = 0.9
 const kFrictionGround = 0.6
-const kViscosity = 1
 const kForceDrag = 0.24
 
 let bodies = [] as Body[]
@@ -19,7 +18,7 @@ const register1 = new Vec2
 
 const count: { [n: number]: number } = {}
 
-const numberOfCushions = 3
+//const numberOfCushions = 3
 
 function mainloop() {
     context.clearRect(0, 0, cwidth, cheight)
@@ -30,7 +29,7 @@ function mainloop() {
 
     let addPieces = false
 
-    for (let i = numberOfCushions; i < bodies.length; ++i) {
+    for (let i = 3 /*numberOfCushions*/; i < bodies.length; ++i) {
         const b = bodies[i] as Piece
         //if (!(b instanceof Piece)) continue
 
@@ -55,7 +54,7 @@ function mainloop() {
         }
     }
 
-    for (let i = numberOfCushions; i < bodies.length - 1; ++i) {
+    for (let i = 3 /*numberOfCushions*/; i < bodies.length - 1; ++i) {
         const b = bodies[i] as Piece
         //if (!(b instanceof Piece)) continue
 
