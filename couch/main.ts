@@ -20,6 +20,10 @@ const count: { [n: number]: number } = {}
 
 //const numberOfCushions = 3
 
+const timeLimit = 180000
+let timePassed = 0
+let timeStarted = -1
+
 function mainloop() {
     context.clearRect(0, 0, cwidth, cheight)
 
@@ -145,6 +149,35 @@ function mainloop() {
 
     for (let b of bodies) {
         b.paint(context)
+    }
+
+    if (timeStarted != -1) {
+        timePassed = Date.now() - timeStarted
+
+        const timeRemaining = timeLimit - timePassed
+        if (timeRemaining <= 0) {
+            timeStarted = -1
+            gameover()
+        }
+        else {
+            const seconds = (0 | timeRemaining / 1000) % 60
+            const minutes = 0 | timeRemaining / 60000
+            const timeString = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`
+
+            context.save()
+
+            context.translate(0.5 * cwidth, cheight - 30)
+
+            // context.shadowColor = '#776e65'
+            // context.shadowOffsetY = 0.5
+            // context.shadowBlur = 1
+
+            context.font = `30px 'Segoe UI','Helvetica Neue',sans-serif`
+            context.fillStyle = '#f9f6f2'
+            context.fillText(`Time remaining ${timeString}`, 0, 0)
+
+            context.restore()
+        }
     }
 
     if (draggingPoint) {

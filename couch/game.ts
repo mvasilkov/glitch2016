@@ -34,9 +34,19 @@ function start() {
     if ((isMobile || cscale > 1) && document.body.requestFullscreen) {
         document.body.requestFullscreen()
     }
+
+    timePassed = 0
+    timeStarted = Date.now()
 }
 
 function gameover() {
+    let score = 0
+    for (let n = 2; n <= 2048; n *= 2) {
+        score += n * count[n]
+    }
+
+    document.getElementById('score')!.innerText = '' + score
+
     endScreen.style.display = 'block'
 
     aa.play('win')
@@ -55,4 +65,7 @@ function reset() {
     pointer.dragging = false
 
     init()
+
+    timePassed = 0
+    timeStarted = Date.now()
 }
